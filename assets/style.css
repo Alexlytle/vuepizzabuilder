@@ -1,0 +1,234 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.pizza-box {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.pizza-box h2 {
+  padding: 10px;
+  font-weight: 800;
+  font-size: 25px;
+}
+
+.pizza-box .inner-pizza-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pizza-box .inner-pizza-wrapper .topping-image {
+  width: 200px;
+}
+
+.pizza-box .inner-pizza-wrapper .inner-pizza-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+
+.pizza-box .inner-pizza-wrapper .inner-pizza-selection-box {
+  padding: 15px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+.whole-pizza, .left-pizza, .right-pizza {
+  cursor: pointer;
+}
+
+.right-pizza-box {
+  background: #ff671b;
+}
+
+.right-pizza-box .crust-wrapper {
+  padding: 15px;
+}
+
+.right-pizza-box select {
+  width: 100%;
+  padding: 10px;
+}
+
+.right-pizza-box h2 {
+  color: white;
+  font-weight: 900;
+  font-size: 25px;
+}
+
+.padding-0 {
+  padding: 0px !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.tabs-triggers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  cursor: pointer;
+  border-top: 1px solid black;
+  padding: 8px;
+  border-bottom: 1px solid black;
+}
+
+.tabs-trigger--active {
+  color: white;
+}
+
+p.topping {
+  font-size: 28px;
+  text-align: center;
+  padding: 40px;
+}
+
+.tabs-triggers p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.topping-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px;
+}
+
+.topping-list p {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.topping-list .size {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.topping-list .size img:nth-child(1) {
+  width: 20px;
+  margin-right: 15px;
+}
+
+.pizza-icon-text {
+  text-align: center;
+}
+
+.pizza-icon-text img {
+  width: 40px;
+}
+
+.pizza-icon-text p {
+  margin: 10px 0 0 0;
+  color: #ff671b;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+form {
+  padding: 30px;
+}
+
+form label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 767.98px) {
+  .row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .pizza-box .inner-pizza-wrapper .topping-image {
+    display: none;
+  }
+  .pizza-box h2 {
+    text-align: center;
+  }
+  .pizza-box {
+    border-bottom: 1px solid black;
+    border-right: none;
+  }
+}
+
+.radio {
+  margin: 0.5rem;
+}
+
+.radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.radio input[type="radio"] + .radio-label:before {
+  content: '';
+  background: #f4f4f4;
+  border-radius: 100%;
+  border: 1px solid #b4b4b4;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-right: 1em;
+  vertical-align: top;
+  cursor: pointer;
+  text-align: center;
+}
+
+.radio input[type="radio"]:checked + .radio-label:before {
+  background-color: #ff6000;
+  -webkit-box-shadow: inset 0 0 0 4px #f4f4f4;
+          box-shadow: inset 0 0 0 4px #f4f4f4;
+}
+
+.radio input[type="radio"]:focus + .radio-label:before {
+  outline: none;
+  border-color: #ff6000;
+}
+
+.radio input[type="radio"]:disabled + .radio-label:before {
+  -webkit-box-shadow: inset 0 0 0 4px #f4f4f4;
+          box-shadow: inset 0 0 0 4px #f4f4f4;
+  border-color: #b4b4b4;
+  background: #b4b4b4;
+}
+
+.radio input[type="radio"] + .radio-label:empty:before {
+  margin-right: 0;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pizza ordering</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-md-6  padding-0">
+                    <div class="pizza-box" v-for="pizzas in pizza">
+                        <h2>{{pizzas.pizza}}</h2>
+                        <div class="inner-pizza-wrapper">
+                            <div class="inner-pizza-box">
+                                <img class="topping-image" :src="pizzas.image" alt="">
+                            </div>
+                            <div class="inner-pizza-selection-box">
+                                            <div class="whole-pizza pizza-icon-text" ref="test" >
+                                                <div v-if="pizzas.whole.selected == true"  :data-id="pizzas.id"  @click="handleWholePizza($event)">
+                                                   
+                                                    <img src="./assets/images/icons/circle_full.png" alt="">
+                                                    <p>Whole</p>
+                                                </div>
+                                                <div v-else  @click="handleWholePizza($event)" :data-id="pizzas.id">
+                                                    <img src="./assets/images/icons/circle_empty.png" alt="">
+                                                    <p>Whole</p>
+                                                </div>
+                                            </div>
+                                        <div class="left-pizza  pizza-icon-text">
+                                            <div v-if="pizzas.left.selected == true" :data-id="pizzas.id" @click="handleLeftPizza($event)">
+                                           
+                                                <img src="./assets/images/icons/left_full.png" alt="">
+                                                <p>Left</p>
+                                            </div>
+                                            <div v-else  :data-id="pizzas.id" @click="handleLeftPizza($event)">
+                                                
+                                                <img src="./assets/images/icons/left_half_empty.png" alt="">
+                                                <p>Left</p>
+                                            </div>
+                                        </div>
+                                        <div class="right-pizza  pizza-icon-text">
+                                            <div v-if="pizzas.right.selected == true"  :data-id="pizzas.id" @click="handleRightPizza($event)">
+                                                <img src="./assets/images/icons/right_full.png" alt="">
+                                                <p>Right</p>
+                                            </div>
+                                            <div v-else  :data-id="pizzas.id" @click="handleRightPizza($event)">
+                                                <img src="./assets/images/icons/right_empty.png" alt="">
+                                                <p>Right</p>
+                                            </div>
+                                        </div> 
+                                
+                            </div>
+                        </div>
+                      
+                    </div>
+                 
+                </div>
+                <div class="col-md-6  padding-0 right-pizza-box">
+                            <div class="crust-wrapper">
+                                <h2>SELECT A CRUST</h2>
+                                <select v-model = "crust">
+                                    <option v-for="crustOption in crustOptions" :value="crustOption.value">{{crustOption.text}}</option>
+                                </select>
+                            </div>
+                          
+                            <div class="tabs-triggers">
+                                <div class="tabs-trigger" v-for="(item, index) in categories" :class="[index === active ? 'tabs-trigger--active' : '']" @click="activate(index)">													
+                                    <p>{{categories[index]}}</p>	
+    
+                                  </div>
+                              </div>
+                              <div v-if="active == 0">
+                                  <p class="topping" v-if="empty == true">
+                                     Select A Topping
+                                    
+                                  </p>
+                                <div v-for="pizzas in pizza">
+                            
+                                    <div class="topping-list" v-if="pizzas.whole.selected == true">
+                                        <!-- {{pizzas}} -->
+                                            <p>{{pizzas.pizza}}</p>
+                                         <div class="size">
+                                            <img src="./assets/images/icons/white_full.png" alt="" srcset="">
+                                            <img class="pointer" @click="removePizza($event)" :data-id="pizzas.id" src="./assets/images/icons/close.png" alt="">
+                                         </div>   
+                                      
+                                    </div>
+                                    <div class="topping-list" v-if="pizzas.left.selected == true && pizzas.whole.selected !== true">
+                                        <p>{{pizzas.pizza}}</p>
+                                        <div class="size">
+                                            <img src="./assets/images/icons/left_white.png" alt="" srcset="">
+                                            <img  class="pointer"  @click="removePizza($event)" :data-id="pizzas.id" src="./assets/images/icons/close.png" alt="">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="topping-list" v-if="pizzas.right.selected == true && pizzas.left.selected !== true && pizzas.whole.selected !== true">
+                                        <p>{{pizzas.pizza}}</p>
+                                        <div class="size">
+                                            <img src="./assets/images/icons/right_white_full.png" alt="" srcset="">
+                                            <img   class="pointer" @click="removePizza($event)" :data-id="pizzas.id" src="./assets/images/icons/close.png" alt="">
+                                        </div>
+                                        
+                                    </div>
+                               
+                                    
+                                </div>
+                              </div>
+                              <div v-if="active == 1">
+                                <form action="">
+                                         <label>Bake</label>
+                                        <div class="radio"  v-for = "bakes in bake">
+                                            <input  type="radio"  v-model="baking" :value="bakes.val">
+                                            <label  class="radio-label">     {{bakes.text}}</label>
+                                        </div>
+                                
+                                
+                                        <label>Cheese</label>
+                                        <div class="radio"  v-for = "cheeeses in cheeese">
+                                            
+                                            <input class="radio-label" type="radio" v-model="cheeseRadio" :value="cheeeses.val">
+                                            <label class="radio-label">
+                                        
+                                             {{cheeeses.text}}
+                                            </label>
+                                        </div>
+                               
+                           
+                                  <label>Sauce</label>
+                                  <div class="radio" v-for = "sauces in sauce">
+                                    <input class="radio-label" type="radio" v-model="sauceRadio" :value="sauces.val">
+                                    <label class="radio-label">
+                                
+                                     {{sauces.text}}
+                                    </label>
+                                  </div>
+
+                                  <label for="">Cut Option</label>
+                                  <div class="radio" v-for = "cuts in cut">
+                                    <input class="radio-label" type="radio" v-model="cutRadio" :value="cuts.val">
+                                    <label class="radio-label" >
+                                
+                                     {{cuts.text}}
+                                    </label>
+                                  </div>
+                                    <button>ADD TO CART</button>
+                                </form>
+                             
+
+                                </div>
+   
+                              
+                              </div>
+                            
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3.0"></script>
+    <script src="./assets/script.js"></script>
+
+</body>
+</html>
